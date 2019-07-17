@@ -2,21 +2,24 @@
 
 namespace App\Repositories;
 
-use App\Post;
+use App\User;
+use App\Traits\UploadTrait;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class PostRepository implements PostRepositoryInterface
+class UserRepository implements UserRepositoryInterface
 {
+    use UploadTrait;
+
     protected $model;
 
     /**
      * PostRepository constructor.
      *
-     * @param Post $post
+     * @param User $user
      */
-    public function __construct(Post $post)
+    public function __construct(User $user)
     {
-        $this->model = $post;
+        $this->model = $user;
     }
 
     public function all()
@@ -26,7 +29,7 @@ class PostRepository implements PostRepositoryInterface
 
     public function store(array $data)
     {
-      return $this->model->create($data);
+        return $this->model->create($data);
     }
 
     public function create()
@@ -47,10 +50,9 @@ class PostRepository implements PostRepositoryInterface
 
     public function find($id)
     {
-        if (null == $post = $this->model->find($id)) {
-            throw new ModelNotFoundException("Post not found");
+        if (null == $user = $this->model->find($id)) {
+            throw new ModelNotFoundException("User not found");
         }
-
-        return $post;
+        return $user;
     }
 }

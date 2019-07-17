@@ -19,8 +19,6 @@ class PostController extends Controller
         return view('Post.index');
     }
 
-
-
     public function show($post)
     {
         $this->repository->find($post);

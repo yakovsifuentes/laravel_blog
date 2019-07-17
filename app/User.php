@@ -9,14 +9,16 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'email',
+        'password',
+        'profile_image'
     ];
 
     /**
@@ -37,8 +39,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function getImageAtrribute()
+    {
+        return $this->profile_image;
+    }
+
     public function post()
     {
         return $this->hasMany(Post::class);
+    }
+
+    public function updateProfile(Request $request)
+    {
+
     }
 }

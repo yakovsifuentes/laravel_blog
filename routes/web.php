@@ -15,5 +15,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+Route::get('/profile', 'UserController@index')->name('profile.index');
+Route::post('/profile/update', 'UserController@updateProfile')->name('profile.update');
 Route::resource('post','PostController');
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
