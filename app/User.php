@@ -49,8 +49,8 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
-    public function updateProfile(Request $request)
+    public function getImageAttribute()
     {
-
+        return $this->profile_image;
     }
 }
