@@ -44,11 +44,19 @@ class User extends Authenticatable
         return $this->profile_image;
     }
 
+
+    /* Relationship */
+    public function request(){
+        return $this->hasMany(Request::class, 'user_id');
+    }
+
     public function post()
     {
         return $this->hasMany(Post::class);
     }
 
+
+    /* Accesor */
     public function getImageAttribute()
     {
         return $this->profile_image;
