@@ -20,6 +20,9 @@ class RedirectIfAuthenticated
         if (Auth::guard($guard)->check()) {
             return redirect('/home');
         }
+        /*if (Auth::guard('web')->check()) {
+            return redirect('/dashboard');
+        }*/
 
         return $next($request);
     }

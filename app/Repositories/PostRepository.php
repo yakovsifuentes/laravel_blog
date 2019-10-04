@@ -3,7 +3,10 @@
 namespace App\Repositories;
 
 use App\Post;
+use App\PostTO;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Auth;
+use App\UserTO;
 
 class PostRepository implements PostRepositoryInterface
 {
@@ -24,9 +27,13 @@ class PostRepository implements PostRepositoryInterface
         $this->model->all();
     }
 
-    public function store(array $data)
+    public function store(PostTO $post)
     {
-      return $this->model->create($data);
+        $this->model->create([
+            'user_id'  => Auth::id(),
+            'comment'  => $post->getComment(),
+            'media_id' => $post->getImage()
+            ]);
     }
 
     public function create()
@@ -52,5 +59,11 @@ class PostRepository implements PostRepositoryInterface
         }
 
         return $post;
+    }
+
+
+    public function allPostbyUser(UserTO $userTO)
+    {
+        return Post::where('user_id', $userTO->getId())->get();
     }
 }

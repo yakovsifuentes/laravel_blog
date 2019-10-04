@@ -1,4 +1,7 @@
 @extends('master.layouts.master')
+
+
+
 @section('content')
     <div class="container">
         <form action="{{ route('post.store') }}" method="post">
@@ -16,3 +19,4 @@
         </form>
     </div>
 @endsection
+@section

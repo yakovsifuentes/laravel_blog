@@ -1,12 +1,11 @@
-@extends('master.layouts.master')
-@section('content')
-
-    <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-            <h1 class="display-4">Listado de Post</h1>
-            <p class="lead">Listado de Post del Usuario.</p>
-            <a href="{{ route('post.create') }}" class="btn btn-sm btn-primary">Crear Post</a>
-        </div>
-    </div>
-
-@endsection
+<div class="content mt-5">
+    @if(isset($all_post_by_user))
+        @foreach($all_post_by_user as $post)
+            <div class="row mt-2 p-2">
+                <div class="col-sm-12">
+                    <h5>{{ $post->comment }}</h5>
+                </div>
+            </div>
+        @endforeach
+    @endif
+</div>

@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UserRepository implements UserRepositoryInterface
 {
-    use UploadTrait;
-
     protected $model;
 
     /**
@@ -27,9 +25,9 @@ class UserRepository implements UserRepositoryInterface
         $this->model->all();
     }
 
-    public function store(array $data)
+    public function store(User $user)
     {
-        return $this->model->create($data);
+        return $this->model->create($user);
     }
 
     public function create()

@@ -40,6 +40,7 @@ return [
     | Supported Drivers: "local", "ftp", "sftp", "s3", "rackspace"
     |
     */
+    'uploads' => env('FILESYSTEM_DRIVER', 's3'),
 
     'disks' => [
 
@@ -54,7 +55,6 @@ return [
             'url' => env('APP_URL').'/public',
             'visibility' => 'public',
         ],
-
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
@@ -63,7 +63,12 @@ return [
             'bucket' => env('AWS_BUCKET'),
             'url' => env('AWS_URL'),
         ],
-
+        'uploads' => [
+            'driver' => 'local',
+            'root' => public_path()."/uploads",
+            'url' => env('APP_URL').'/public',
+            'visibility' => 'public',
+        ],
     ],
 
 ];

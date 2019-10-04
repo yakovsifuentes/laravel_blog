@@ -2,23 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\PostRepositoryInterface;
+use App\UserTO;
 use Illuminate\Http\Request;
 use App\Repositories\UserRepositoryInterface;
 use App\Http\Requests\UpdateProfileImageStorage;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     private $repository;
+    private $postRepository;
 
-    public function __construct(UserRepositoryInterface $repository)
+    public function __construct(UserRepositoryInterface $repository, PostRepositoryInterface $postRepository)
     {
         $this->repository = $repository;
-        $this->middleware('auth');
+        $this->postRepository = $postRepository;
+        //$this->middleware('auth');
     }
 
     public function index()
     {
-        return view('auth.profile');
+        dd("hola");
+        $userTO = new UserTO();
+        $userTO->setId(Auth::id());
+        $all_post_by_user = $this->postRepository->allPostbyUser($userTO);
+        //return view('auth.profile', compact('all_post_by_user'));
+        return view('home', compact('all_post_by_user'));
     }
 
 
